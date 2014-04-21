@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<head>
+    <meta charset="utf-8" />
+    <script src="bower_components/jquery/jquery.min.js"></script>
+    <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.2.min.js"></script>
+    <script src="js/triplesec-3.0.0-min.js"></script>
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.2.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TripleSec secrets manager</title>
+</head>
+<body>
+    <div data-role="page" id="home">
+        <div data-role="header">
+            <h1>TripleSec secrets manager</h1>
+            <a data-icon="plus" href="#addSecretDialog" class="ui-btn-right">Add secret</a>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview" id="secrets">
+                
+            </ul>
+        </div>
+    </div>
+    <div data-role="page" data-dialog="true" id="addSecretDialog">
+        <div data-role="header">
+            <h2>Add secret</h2>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview">
+                <li data-role="fieldcontain"><label for="passwordEncrypt">Password</label><input autocomplete="off" type="password" id="passwordEncrypt" /></li>
+                <li data-role="fieldcontain"><label for="dataName">Name</label><input autocomplete="off" type="text" id="dataName"/></li>
+                <li data-role="fieldcontain"><label for="dataToEncrypt">Text</label><textarea autocomplete="off" id="dataToEncrypt"></textarea></li>
+                <li data-icon="lock"><a href="#home" id="encryptBtn">Encrypt</a></li>
+            </ul>
+        </div>
+    </div>
+    <div data-role="page" data-dialog="true" id="showSecretDialog">
+        <div data-role="header">
+            <h2 class="secretName">Show secret</h2>
+        </div>
+        <div data-role="content">
+            <ul data-role="listview">
+                <li data-role="fieldcontain"><label for="passwordDecrypt">Password</label><input type="password" id="passwordDecrypt" /></li>
+                <li data-role="fieldcontain"><label for="dataToDecrypt">Secret</label><textarea autocomplete="off" id="dataToDecrypt" readonly></textarea></li>
+                <li data-role="fieldcontain"><label for="plaintext">Text</label><textarea autocomplete="off" id="plaintext" readonly disabled></textarea></li>
+                <li data-icon="eye"><a id="decryptBtn">Decrypt</a></li>
+            </ul>
+        </div>
+    </div>
+</body>
