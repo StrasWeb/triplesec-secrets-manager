@@ -1,0 +1,5 @@
+#Rename this file to .htaccess if you run PHP in CGI mode.
+<IfModule mod_rewrite.c>
+RewriteEngine on
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization},L]
+</IfModule> 
