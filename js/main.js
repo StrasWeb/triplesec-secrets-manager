@@ -21,6 +21,13 @@ function deleteSecret(name) {
     }, updateList);
 }
 
+function confirmDelete(name) {
+    'use strict';
+    if (window.confirm('Do you really want to delete ' + name + '?')) {
+        deleteSecret(name);
+    }
+}
+
 function updateList(secrets) {
     'use strict';
     $('#secrets').empty();
@@ -29,7 +36,7 @@ function updateList(secrets) {
         sessionStorage.setItem('curSecretName', $(this).data('secret'));
     });
     $('.delSecretBtn').click(function () {
-        deleteSecret($(this).data('secret'));
+        confirmDelete($(this).data('secret'));
     });
 }
 
