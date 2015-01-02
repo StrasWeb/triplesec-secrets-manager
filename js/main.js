@@ -90,7 +90,7 @@ function initDecrypt() {
 
 function getList() {
     'use strict';
-    $.get('php/ajax.php?action=list', updateList);
+    $.get('php/ajax.php?action=list' + '&' + new Date().getTime(), updateList);
 }
 
 function showSecret(secret) {
