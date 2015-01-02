@@ -1,2 +1,4 @@
 bower_components/
 php/conf.php
+dist/
+node_modules/
