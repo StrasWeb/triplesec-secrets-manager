@@ -36,7 +36,7 @@ function deleteSecret($name) {
     $sth->execute();
 }
 
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 
 switch ($_GET['action']) {
 case 'add':
