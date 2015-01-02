@@ -14,6 +14,15 @@ function addSecretToList(index, secret) {
     $('#secrets').append('<li><a data-i="' + index + '" href="#showSecretDialog" class="showSecretBtn" data-secret="' + secret.name + '">' + secret.name + '</a><a class="delSecretBtn" data-secret="' + secret.name + '" data-icon="delete">Delete</a></li>').listview('refresh');
 }
 
+function updateList(secrets) {
+    'use strict';
+    $('#secrets').empty();
+    $(secrets).each(addSecretToList);
+    $('.showSecretBtn').click(function () {
+        sessionStorage.setItem('curSecretName', $(this).data('secret'));
+    });
+}
+
 function deleteSecret(name) {
     'use strict';
     $.post('php/ajax.php?action=del', {
@@ -26,18 +35,6 @@ function confirmDelete(name) {
     if (window.confirm('Do you really want to delete ' + name + '?')) {
         deleteSecret(name);
     }
-}
-
-function updateList(secrets) {
-    'use strict';
-    $('#secrets').empty();
-    $(secrets).each(addSecretToList);
-    $('.showSecretBtn').click(function () {
-        sessionStorage.setItem('curSecretName', $(this).data('secret'));
-    });
-    $('.delSecretBtn').click(function () {
-        confirmDelete($(this).data('secret'));
-    });
 }
 
 function encryptEnd(err, buff) {
@@ -110,16 +107,18 @@ function getSecret(secret) {
 
 function initView(e, page) {
     'use strict';
-    switch (page.toPage.attr('id')) {
-    case 'home':
-        getList();
-        break;
-    case 'showSecretDialog':
-        getSecret(sessionStorage.getItem('curSecretName'));
-        break;
-    case 'addSecretDialog':
-        $('#passwordEncrypt, #dataName, #dataToEncrypt').val('');
-        break;
+    if (e.type === 'pagechange') {
+        switch (page.toPage.attr('id')) {
+        case 'home':
+            getList();
+            break;
+        case 'showSecretDialog':
+            getSecret(sessionStorage.getItem('curSecretName'));
+            break;
+        case 'addSecretDialog':
+            $('#passwordEncrypt, #dataName, #dataToEncrypt').val('');
+            break;
+        }
     }
 }
 
@@ -128,6 +127,9 @@ function init() {
     $('#encryptBtn').click(initEncrypt);
     $('#decryptBtn').click(initDecrypt);
     $('#refreshBtn').click(getList);
+    $(document).on('click', '.delSecretBtn', function () {
+        confirmDelete($(this).data('secret'));
+    });
 }
 
 $(document).ready(init);
