@@ -127,6 +127,7 @@ function init() {
     'use strict';
     $('#encryptBtn').click(initEncrypt);
     $('#decryptBtn').click(initDecrypt);
+    $('#refreshBtn').click(getList);
 }
 
 $(document).ready(init);
