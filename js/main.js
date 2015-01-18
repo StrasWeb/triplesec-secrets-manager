@@ -3,10 +3,13 @@
 
 function progress(where) {
     'use strict';
-    $.mobile.loading('show', {
-        text: where.what,
-        textVisible: true
-    });
+    $.mobile.loading(
+        'show',
+        {
+            text: where.what,
+            textVisible: true
+        }
+    );
 }
 
 function addSecretToList(index, secret) {
@@ -18,16 +21,22 @@ function updateList(secrets) {
     'use strict';
     $('#secrets').empty();
     $(secrets).each(addSecretToList);
-    $('.showSecretBtn').click(function () {
-        sessionStorage.setItem('curSecretName', $(this).data('secret'));
-    });
+    $('.showSecretBtn').click(
+        function () {
+            sessionStorage.setItem('curSecretName', $(this).data('secret'));
+        }
+    );
 }
 
 function deleteSecret(name) {
     'use strict';
-    $.post('php/ajax.php?action=del', {
-        name: name
-    }, updateList);
+    $.post(
+        'php/ajax.php?action=del',
+        {
+            name: name
+        },
+        updateList
+    );
 }
 
 function confirmDelete(name) {
@@ -41,10 +50,14 @@ function encryptEnd(err, buff) {
     'use strict';
     $.mobile.loading('hide');
     if (!err) {
-        $.post('php/ajax.php?action=add', {
-            triplesec: buff.toString('hex'),
-            name: sessionStorage.getItem('curSecretName')
-        }, updateList);
+        $.post(
+            'php/ajax.php?action=add',
+            {
+                triplesec: buff.toString('hex'),
+                name: sessionStorage.getItem('curSecretName')
+            },
+            updateList
+        );
     }
 }
 
@@ -58,20 +71,26 @@ function decryptEnd(err, buff) {
 
 function decrypt(key, ciphertext) {
     'use strict';
-    triplesec.decrypt({
-        data:          new triplesec.Buffer(ciphertext, "hex"),
-        key:           new triplesec.Buffer(key),
-        progress_hook: progress
-    }, decryptEnd);
+    triplesec.decrypt(
+        {
+            data:          new triplesec.Buffer(ciphertext, "hex"),
+            key:           new triplesec.Buffer(key),
+            progress_hook: progress
+        },
+        decryptEnd
+    );
 }
 
 function encrypt(key, data) {
     'use strict';
-    triplesec.encrypt({
-        data:          new triplesec.Buffer(data),
-        key:           new triplesec.Buffer(key),
-        progress_hook: progress
-    }, encryptEnd);
+    triplesec.encrypt(
+        {
+            data:          new triplesec.Buffer(data),
+            key:           new triplesec.Buffer(key),
+            progress_hook: progress
+        },
+        encryptEnd
+    );
 }
 
 function initEncrypt() {
@@ -100,9 +119,13 @@ function getSecret(secret) {
     $('.secretName').text(secret);
     $('#passwordDecrypt, #dataToDecrypt').val('');
     $('#plaintext').val('').textinput('disable');
-    $.post('php/ajax.php?action=get', {
-        name: secret
-    }, showSecret);
+    $.post(
+        'php/ajax.php?action=get',
+        {
+            name: secret
+        },
+        showSecret
+    );
 }
 
 function initView(e, page) {
@@ -127,9 +150,13 @@ function init() {
     $('#encryptBtn').click(initEncrypt);
     $('#decryptBtn').click(initDecrypt);
     $('#refreshBtn').click(getList);
-    $(document).on('click', '.delSecretBtn', function () {
-        confirmDelete($(this).data('secret'));
-    });
+    $(document).on(
+        'click',
+        '.delSecretBtn',
+        function () {
+            confirmDelete($(this).data('secret'));
+        }
+    );
 }
 
 $(document).ready(init);
