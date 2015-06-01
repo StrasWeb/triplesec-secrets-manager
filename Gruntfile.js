@@ -6,7 +6,8 @@ module.exports = function (grunt) {
             uglify: {
                 combine: {
                     files: {
-                        'dist/main.js': ['js/main.js']
+                        'dist/main.js': ['js/main.js'],
+                        'dist/import_onesafe.js': ['js/import_onesafe.js']
                     },
                     options: {
                         sourceMap: true

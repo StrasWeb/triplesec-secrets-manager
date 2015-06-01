@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>TripleSec secrets manager - Import data from OneSafe</title>
+        <link rel="stylesheet" href="bower_components/jquery-mobile-bower/css/jquery.mobile-1.4.2.min.css" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <body>
+        <div data-role="content">
+            <ul data-role="listview">
+                <li><label>CSV file: <input type="file" id="csvfile" accept="text/csv" /></label><br/></li>
+                <li><label>Password: <input type="password" id="pass" /></label><br/></li>
+                <li><input type="submit" id="getcsv" value="Import" /></li>
+            </ul>
+        </div>
+        <script src="bower_components/jquery/jquery.min.js"></script>
+        <script src="bower_components/jquery-mobile-bower/js/jquery.mobile-1.4.2.min.js"></script>
+        <script src="bower_components/papaparse/papaparse.min.js"></script>
+        <script src="bower_components/triplesec/browser/triplesec.js"></script>
+        <script src="dist/main.js"></script>
+        <script src="dist/import_onesafe.js"></script>
+    </body>
+</html>
