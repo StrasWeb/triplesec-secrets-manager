@@ -7,7 +7,7 @@ function cryptData(result) {
         if (i > 0 && line[0]) {
             triplesec.encrypt(
                 {
-                    data: new triplesec.Buffer('Username: ' + line[6] + '\nPassword: ' + line[7] + '\nHost: ' + line[3] + '\nDatabase: ' + line[5]),
+                    data: new triplesec.Buffer('Username: ' + line[6] + '\nPassword: ' + line[7] + '\nURL: ' + line[2] + '\nHost: ' + line[3] + '\nDatabase: ' + line[5] + '\nType: ' + line[1]),
                     key: new triplesec.Buffer(pass),
                     progress_hook: progress
                 },
