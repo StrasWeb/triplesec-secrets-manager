@@ -44,11 +44,10 @@ if (empty($_SERVER['PHP_AUTH_DIGEST'])
         )
     );
 
-    if ((isset($auth)
-        && $auth['opaque'] == md5(REALM)
-        && $auth['response'] == $valid)
+    if (!(isset($auth)
+        || $auth['opaque'] != md5(REALM)
+        || $auth['response'] != $valid)
     ) {
-    } else {
         echo json_encode(['error' => 'Invalid credentials']).PHP_EOL;
         auth();
     }
