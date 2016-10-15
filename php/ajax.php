@@ -11,6 +11,7 @@ function getSecret($name)
     $sth = $dbh->prepare('SELECT name, triplesec FROM triplesec WHERE name = :name');
     $sth->bindParam(':name', $name);
     $sth->execute();
+
     return $sth->fetch(PDO::FETCH_ASSOC);
 }
 
@@ -19,6 +20,7 @@ function getList()
     global $dbh;
     $sth = $dbh->prepare('SELECT name FROM triplesec');
     $sth->execute();
+
     return $sth->fetchAll(PDO::FETCH_ASSOC);
 }
 
@@ -58,5 +60,3 @@ case 'list':
 case 'get':
     echo json_encode(getSecret($_POST['name'])).PHP_EOL;
 }
-
-?>
