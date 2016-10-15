@@ -141,6 +141,8 @@ function initView(e, page) {
         case 'addSecretDialog':
             $('#passwordEncrypt, #dataName, #dataToEncrypt').val('');
             break;
+        default:
+            break;
         }
     }
 }
