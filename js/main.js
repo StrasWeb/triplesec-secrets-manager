@@ -1,4 +1,4 @@
-/*global $, triplesec*/
+/*global $, triplesec, sessionStorage*/
 /*jslint browser: true */
 
 function progress(where) {
